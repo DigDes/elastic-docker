@@ -21,10 +21,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: get folder content
-      run: ls -la
     - name: Build the Docker image elasticsearch
-      run: docker build ./elasticsearch --file Dockerfile --tag docker.pkg.github.com/digdes/$IMAGE_NAME_ELASTIC
+      run: docker build ./elasticsearch --tag docker.pkg.github.com/digdes/$IMAGE_NAME_ELASTIC
     - name: Log into GitHub Container Registry
       run: echo ${{ secrets.GITHUB_TOKEN }} | docker login -u DigDes --password-stdin ghcr.io
     - name: Push image to GitHub Container Registry
