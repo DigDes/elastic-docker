@@ -4,13 +4,7 @@ on:
   release:
     types: [created]
   workflow_dispatch:
-      inputs:
-        logLevel:
-          description: 'Log level'     
-          required: true
-          default: 'warning'
-        tags:
-          description: 'Test scenario tags'  
+      
 env:
   IMAGE_NAME_ELASTIC: elasticsearch-dd:7.6.0
   IMAGE_NAME_OPENDISTRO: opendistro-elasticsearch-dd:7.10.2
@@ -26,6 +20,6 @@ jobs:
     - name: Log into GitHub Container Registry
       run: echo ${{ secrets.GITHUB_TOKEN }} | docker login -u DigDes --password-stdin ghcr.io
     - name: Push image to GitHub Container Registry
-      run: docker push docker.pkg.github.com/${{ github.repository_owner }}/$IMAGE_NAME_ELASTIC
+      run: docker push docker.pkg.github.com/digdes/$IMAGE_NAME_ELASTIC
       
       
