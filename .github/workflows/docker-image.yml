@@ -16,14 +16,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image elasticsearch
-      run: docker build ./elasticsearch --tag docker.pkg.github.com/digdes/elastic-docker/$IMAGE_NAME_ELASTIC
+      run: docker build ./elasticsearch --tag ghcr.io/digdes/$IMAGE_NAME_ELASTIC
     - name: Build the Docker image opendistro elasticsearch
-      run: docker build ./opendistro-elasticsearch --tag docker.pkg.github.com/digdes/elastic-docker/$IMAGE_NAME_OPENDISTRO
+      run: docker build ./opendistro-elasticsearch --tag ghcr.io/digdes/$IMAGE_NAME_OPENDISTRO
     - name: Log into GitHub Container Registry
-      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login -u DigDes --password-stdin docker.pkg.github.com
+      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login -u DigDes --password-stdin ghcr.io
     - name: Push elasticsearch image to GitHub Container Registry
-      run: docker push docker.pkg.github.com/digdes/elastic-docker/$IMAGE_NAME_ELASTIC
+      run: docker push ghcr.io/digdes/$IMAGE_NAME_ELASTIC
     - name: Push opendistro elasticsearch image to GitHub Container Registry
-      run: docker push docker.pkg.github.com/digdes/elastic-docker/$IMAGE_NAME_OPENDISTRO
+      run: docker push ghcr.io/digdes/$IMAGE_NAME_OPENDISTRO
       
       
