@@ -18,7 +18,7 @@ jobs:
     - name: Build the Docker image elasticsearch
       run: docker build ./elasticsearch --tag docker.pkg.github.com/digdes/$IMAGE_NAME_ELASTIC
     - name: Log into GitHub Container Registry
-      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login -u DigDes --password-stdin ghcr.io
+      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login -u DigDes --password-stdin docker.pkg.github.com
     - name: Push image to GitHub Container Registry
       run: docker push docker.pkg.github.com/digdes/$IMAGE_NAME_ELASTIC
       
