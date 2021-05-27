@@ -1,0 +1,23 @@
+name: Docker Image CI
+
+on:
+  release:
+    types: [created]
+env:
+  IMAGE_NAME_ELASTIC: elasticsearch-dd:7.6.0
+  IMAGE_NAME_OPENDISTRO: opendistro-elasticsearch-dd:7.10.2
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image elasticsearch
+      run: docker build ./elasticsearch --file Dockerfile --tag docker.pkg.github.com/${{ github.repository_owner }}/$IMAGE_NAME_ELASTIC
+    - name: Log into GitHub Container Registry
+      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login -u DigDes --password-stdin ghcr.io
+    - name: Push image to GitHub Container Registry
+      run: docker push docker.pkg.github.com/${{ github.repository_owner }}/$IMAGE_NAME_ELASTIC
+      
+      
